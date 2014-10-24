@@ -16,7 +16,8 @@ RUN apt-get -qq update && apt-get install --fix-missing -y --force-yes \
 	dialog \
 	unzip \ 
 	default-jre \ 
-	default-jdk	
+	default-jdk \ 
+	ssh
 
 
 # Set environment
