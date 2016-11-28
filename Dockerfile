@@ -16,7 +16,6 @@ RUN apt-get -qq update && apt-get install --fix-missing -y --force-yes \
 	nano \
 	dialog \
 	unzip \ 
-	openjdk-8-jre \ 		
 	openjdk-8-jdk \ 	
 	ssh
 
@@ -43,7 +42,7 @@ RUN sed -i 's/22/49701/g' /etc/ssh/sshd_config
 
 # Parliament
 RUN mkdir /usr/local/ParliamentKB
-RUN wget -P /usr/local/ParliamentKB/ semwebcentral.org/frs/download.php/522/ParliamentQuickStart-v2.7.10-gcc-64-ubuntu-15.10.zip
+RUN wget -P /usr/local/ParliamentKB/ http://semwebcentral.org/frs/download.php/555/ParliamentQuickStart-v2.7.10-gcc-64-ubuntu-15.10.zip
 RUN unzip /usr/local/ParliamentKB/ParliamentQuickStart-v2.7.10-gcc-64-ubuntu-15.10.zip -d /usr/local/ParliamentKB
 RUN chown -R root:root /usr/local/ParliamentKB
 RUN chmod +x /usr/local/ParliamentKB/StartParliament.sh
@@ -53,15 +52,15 @@ RUN chmod +x /usr/local/ParliamentKB/StartParliamentDaemon.sh
 
 # Add files
 ADD containerSetup.sh /home/root/containerSetup.sh
-ADD jetty.xml /usr/local/ParliamentKB/conf/jetty.xml
-ADD ParliamentConfig.txt /usr/local/ParliamentKB/ParliamentConfig.txt
+#ADD jetty.xml /usr/local/ParliamentKB/conf/jetty.xml
+#ADD ParliamentConfig.txt /usr/local/ParliamentKB/ParliamentConfig.txt
 ADD realm.properties /etc/realm.properties
 
 
 RUN chown root:root \
 	/home/root/containerSetup.sh \
-	/usr/local/ParliamentKB/conf/jetty.xml \ 
-	/usr/local/ParliamentKB/ParliamentConfig.txt \ 
+#	/usr/local/ParliamentKB/conf/jetty.xml \ 
+#	/usr/local/ParliamentKB/ParliamentConfig.txt \ 
 	/etc/realm.properties 
 
 
@@ -71,7 +70,7 @@ RUN chown root:root \
 
 
 EXPOSE 49701
-EXPOSE 49702
+EXPOSE 8089
 
 
 CMD ["/usr/sbin/sshd", "-D"]
