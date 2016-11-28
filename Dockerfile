@@ -2,8 +2,8 @@
 #
 # VERSION               0.0.1
 
-FROM     ubuntu:14.04
-MAINTAINER Alber Sanchez
+FROM     ubuntu:15.10
+MAINTAINER daXid
 
 
 # Install
@@ -12,11 +12,12 @@ RUN apt-get -qq update && apt-get install --fix-missing -y --force-yes \
 	sudo \
 	wget \
 	gcc \
+	vim \
 	nano \
 	dialog \
 	unzip \ 
-	default-jre \ 
-	default-jdk \ 
+	openjdk-8-jre \ 		
+	openjdk-8-jdk \ 	
 	ssh
 
 
@@ -25,12 +26,12 @@ RUN locale-gen en_US.UTF-8
 ENV LANG en_US.UTF-8
 ENV LANGUAGE en_US:en
 ENV LC_ALL en_US.UTF-8
-ENV JAVA_HOME /usr/lib/jvm/java-7-openjdk-amd64
+ENV JAVA_HOME /usr/lib/jvm/java-8-openjdk-amd64
 RUN env	
 
 
 # Users and passwords	
-RUN echo 'root:xxxx.xxxx.xxxx' | chpasswd
+RUN echo 'root:xxxx' | chpasswd
 
 
 # Configure SSH
@@ -42,8 +43,8 @@ RUN sed -i 's/22/49701/g' /etc/ssh/sshd_config
 
 # Parliament
 RUN mkdir /usr/local/ParliamentKB
-RUN wget -P /usr/local/ParliamentKB/ semwebcentral.org/frs/download.php/522/ParliamentQuickStart-v2.7.6-gcc-64.zip
-RUN unzip /usr/local/ParliamentKB/ParliamentQuickStart-v2.7.6-gcc-64.zip -d /usr/local/ParliamentKB
+RUN wget -P /usr/local/ParliamentKB/ semwebcentral.org/frs/download.php/522/ParliamentQuickStart-v2.7.10-gcc-64-ubuntu-15.10.zip
+RUN unzip /usr/local/ParliamentKB/ParliamentQuickStart-v2.7.10-gcc-64-ubuntu-15.10.zip -d /usr/local/ParliamentKB
 RUN chown -R root:root /usr/local/ParliamentKB
 RUN chmod +x /usr/local/ParliamentKB/StartParliament.sh
 RUN chmod +x /usr/local/ParliamentKB/StartParliamentDaemon.sh
@@ -61,12 +62,13 @@ RUN chown root:root \
 	/home/root/containerSetup.sh \
 	/usr/local/ParliamentKB/conf/jetty.xml \ 
 	/usr/local/ParliamentKB/ParliamentConfig.txt \ 
-	/etc/realm.properties
+	/etc/realm.properties \
+	/usr/local/ParliamentKB/lib/org.osgi.foundation-1.2.0.jar
 
 
 # Restarting services
-RUN stop ssh
-RUN start ssh
+#RUN stop ssh
+#RUN start ssh
 
 
 EXPOSE 49701

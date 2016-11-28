@@ -26,6 +26,10 @@ bdbCacheSize           = 32m,1
 
 runAllRulesAtStartup   = no
 
+# If upgrading a triple store from version 2.7.9 or prior, either set this option
+# to "no" or export, clear, and then restore the backup:
+# normalizeTypedStringLiterals = yes
+
 # Sets up the following rules:
 # * "A is a subclass of B" ^ "B is a subclass of C" ==> "A is a subclass of C"
 # * "X is of type A" ^ "A is a subclass of B" ==> "X is of type B"
@@ -42,40 +46,40 @@ inferOwlThing          = off
 # Sets up the following rules:
 # * "P is a subproperty of Q" ^ "Q is a subproperty of R" ==> "P is a subproperty of R"
 # * "P is a subproperty of Q" ^ "P(X, Y)" ==> "Q(X, Y)"
-SubpropertyRule        = on
+SubpropertyRule        = off
 
 # Sets up the following rule:
 # * "P has domain C" ^ "P(X, Y)" ==> "X is of type C"
-DomainRule             = on
+DomainRule             = off
 
 # Sets up the following rule:
 # * "P has range C" ^ "P(X, Y)" ==> "Y is of type C"
-RangeRule              = on
+RangeRule              = off
 
 # Sets up the following rule:
 # * "A is equivalent to B" ==> "A is a subclass of B" ^ "B is a subclass of A"
-EquivalentClassRule    = on
+EquivalentClassRule    = off
 
 # Sets up the following rule:
 # * "P is equivalent to Q" ==> "P is a subproperty of Q" ^ "Q is a subproperty of P"
-EquivalentPropRule     = on
+EquivalentPropRule     = off
 
 # Sets up the following rule:
 # * "P is the inverse of Q" ^ "P(X, Y)" ==> "Q(Y, X)"
-InverseOfRule          = on
+InverseOfRule          = off
 
 # Sets up the following rule:
 # * "P is symmetric" ^ "P(X, Y)" ==> "P(Y, X)"
-SymmetricPropRule      = on
+SymmetricPropRule      = off
 
 # Sets up the following rule:
 # * "P is a functional property" ^ "P(Z, X)" ^ "P(Z, Y)" ==> "owl:sameAs(X, Y)"
-FunctionalPropRule     = on
+FunctionalPropRule     = off
 
 # Sets up the following rule:
 # * "P is an inverse functional property" ^ "P(X, Z)" ^ "P(Y, Z)" ==> "owl:sameAs(X, Y)"
-InvFunctionalPropRule  = on
+InvFunctionalPropRule  = off
 
 # Sets up the following rule:
 # * "P is a transitive property" ^ "P(X, Y)" ^ "P(Y, Z)" ==> "P(X, Z)"
-TransitivePropRule     = on
+TransitivePropRule     = off
