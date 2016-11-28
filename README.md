@@ -24,7 +24,7 @@ Scripts for building a <a href="http://www.docker.com/">Docker</a> image of Parl
 <ol>
 	<li>Clone this project and go to the project's folder</li>
 	<li>Run the host script <code>./setup.sh</code>
-	<li>Log in the container <code>ssh -p 49701 root@localhost</code>. The default password is <em>xxxx.xxxx.xxxx</em></li>
+	<li>Log in the container <code>ssh -p 49701 root@localhost</code>. The default password is <em>xxxx</em></li>
 	<li>Run the container script <code>/home/root/./containerSetup.sh</code></li>
 	
 </ol>
