@@ -62,8 +62,7 @@ RUN chown root:root \
 	/home/root/containerSetup.sh \
 	/usr/local/ParliamentKB/conf/jetty.xml \ 
 	/usr/local/ParliamentKB/ParliamentConfig.txt \ 
-	/etc/realm.properties \
-	/usr/local/ParliamentKB/lib/org.osgi.foundation-1.2.0.jar
+	/etc/realm.properties 
 
 
 # Restarting services
