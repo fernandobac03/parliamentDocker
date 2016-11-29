@@ -28,7 +28,7 @@ runAllRulesAtStartup   = no
 
 # If upgrading a triple store from version 2.7.9 or prior, either set this option
 # to "no" or export, clear, and then restore the backup:
-# normalizeTypedStringLiterals = yes
+normalizeTypedStringLiterals = yes
 
 # Sets up the following rules:
 # * "A is a subclass of B" ^ "B is a subclass of C" ==> "A is a subclass of C"

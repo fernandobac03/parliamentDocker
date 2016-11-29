@@ -1,6 +1,5 @@
 # Docker Parliament triple store
 #
-# VERSION               0.0.1
 
 FROM     ubuntu:15.10
 MAINTAINER daXid
@@ -52,16 +51,19 @@ RUN chmod +x /usr/local/ParliamentKB/StartParliamentDaemon.sh
 
 # Add files
 ADD containerSetup.sh /home/root/containerSetup.sh
-#ADD jetty.xml /usr/local/ParliamentKB/conf/jetty.xml
-#ADD ParliamentConfig.txt /usr/local/ParliamentKB/ParliamentConfig.txt
-ADD realm.properties /etc/realm.properties
+ADD jetty.xml /usr/local/ParliamentKB/conf/jetty.xml
+ADD ParliamentConfig.txt /usr/local/ParliamentKB/ParliamentConfig.txt
+ADD StartParliament.sh /usr/local/ParliamentKB/StartParliament.sh
+ADD StartParliamentDaemon.sh /usr/local/ParliamentKB/StartParliamentDaemon.sh
 
 
 RUN chown root:root \
 	/home/root/containerSetup.sh \
-#	/usr/local/ParliamentKB/conf/jetty.xml \ 
-#	/usr/local/ParliamentKB/ParliamentConfig.txt \ 
-	/etc/realm.properties 
+	/usr/local/ParliamentKB/conf/jetty.xml \ 
+	/usr/local/ParliamentKB/ParliamentConfig.txt \ 
+	/usr/local/ParliamentKB/StartParliament.sh \
+	/usr/local/ParliamentKB/StartParliamentDaemon.sh
+
 
 
 # Restarting services

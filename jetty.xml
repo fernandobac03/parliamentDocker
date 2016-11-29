@@ -43,6 +43,8 @@
 		<Arg><Call class="org.eclipse.jetty.util.log.Log" name="getLog"/></Arg>
 	</Call>
 
+
+
 	<!-- =========================================================== -->
 	<!-- Configure the Server Thread Pool.                           -->
 	<!-- The server holds a common thread pool which is used by      -->
