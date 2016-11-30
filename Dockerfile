@@ -52,6 +52,8 @@ RUN chmod +x /usr/local/ParliamentKB/StartParliamentDaemon.sh
 # Add files
 ADD containerSetup.sh /home/root/containerSetup.sh
 ADD jetty.xml /usr/local/ParliamentKB/conf/jetty.xml
+ADD webdefault.xml /usr/local/ParliamentKB/conf/webdefault.xml
+ADD realm.properties /usr/local/ParliamentKB/conf/realm.properties
 ADD ParliamentConfig.txt /usr/local/ParliamentKB/ParliamentConfig.txt
 ADD StartParliament.sh /usr/local/ParliamentKB/StartParliament.sh
 ADD StartParliamentDaemon.sh /usr/local/ParliamentKB/StartParliamentDaemon.sh
@@ -59,7 +61,9 @@ ADD StartParliamentDaemon.sh /usr/local/ParliamentKB/StartParliamentDaemon.sh
 
 RUN chown root:root \
 	/home/root/containerSetup.sh \
-	/usr/local/ParliamentKB/conf/jetty.xml \ 
+	/usr/local/ParliamentKB/conf/realm.properties \
+	/usr/local/ParliamentKB/conf/jetty.xml \ 	
+	/usr/local/ParliamentKB/conf/webdefault.xml \
 	/usr/local/ParliamentKB/ParliamentConfig.txt \ 
 	/usr/local/ParliamentKB/StartParliament.sh \
 	/usr/local/ParliamentKB/StartParliamentDaemon.sh

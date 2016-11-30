@@ -14,6 +14,17 @@
 <!-- configuration that may be set here.                             -->
 <!-- =============================================================== -->
 <Configure id="Server" class="org.eclipse.jetty.server.Server">
+
+	<Call name="addBean">
+      	  <Arg>
+            <New class="org.eclipse.jetty.security.HashLoginService">
+              <Set name="name">Realm</Set>
+              <Set name="config">/usr/local/ParliamentKB/conf/realm.properties</Set>
+              <Set name="refreshInterval">0</Set>
+            </New>
+      	  </Arg>
+    	</Call>
+
 	<Set name="stopAtShutdown">true</Set>
 	<Set name="stopTimeout">5000</Set>
 	<Set name="dumpAfterStart"><Property name="jetty.dump.start" default="false"/></Set>
