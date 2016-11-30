@@ -1,38 +1,40 @@
-docker_semwebcentral-parliament-2.7.10
-==================
+## GitHub repo. content
 
-Scripts and stuff for building a <a href="http://www.docker.com/">Docker</a> image of Parliament 2.7.10 triple store (<a href="http://parliament.semwebcentral.org/">http://parliament.semwebcentral.org/</a>).
+Scripts and stuff for building a Docker image of Parliament triple store (http://parliament.semwebcentral.org/).
 
 
-<h3>Files:</h3>
-<ul>
-	<li><code>README.md</code> - This file.</li>
-	<li><code>Dockerfile</code> - Docker file for building a Docker Image.</li>
-	<li><code>containerSetup.sh</code> - Commands for setting up Parliament inside a container.</li>
-	<li><code>setup.sh</code> - Host script for removing old containers and images from host machine. Then, it creates a Docker image called "parliament_img".</li>
-	<li><code>jetty.xml</code> - Web and application server configuration file.</li>
-	<li><code>ParliamentConfig.txt</code> - Parliament configuration file.</li>
-	<li><code>StartParliament.sh</code> - Parliament startup script.</li>
-	<li><code>StartParliamentDaemon.sh</code> - Parliament startup script as a daemon..</li>
+# Files :
+
+	README.md - This file.
+	Dockerfile - Docker file for building a Docker Image.
+	containerSetup.sh - Commands for setting up Parliament inside a container.
+	setup.sh - Host script for removing old containers and images from host machine. Then, it creates a Docker image called "parliament_img".
+	jetty.xml - Web and application server configuration file.
+	ParliamentConfig.txt - Parliament configuration file.
+	StartParliament.sh - Parliament startup script.
+	StartParliamentDaemon.sh - Parliament startup script as a daemon..
 </ul>
 
-<h3>Prerequisites:</h3>
-<ul>
-	<li><a href="http://www.docker.com/">Docker</a></li>
-</ul>
+## Instructions:
+
+# Run the image in a container
+For instance with :
+docker run -d --name="parliament1" -p 49701:49701 -p 8089:8089 daxid/docker_semwebcentral-parliament
+
+# Log in the container with ssh and launch parliament
+    Log in the container : 
+```ssh -p 49701 root@localhost``` 
+The default password is xxxx
+    
+Run Parliament launch script : 
+```/home/root/./containerSetup.sh```
+
+## NOTES:
+
+Parliament runs on port 8089. 
+The application web interface would be available at http://localhost:8089/parliament.
+The access recquire login : parliament /pwd : xxxx  (you can modify that in /usr/local/ParliamentDB/conf/realm.properties)
+containerSetup.sh runs Parliament on the background by using ./StartParliament.sh &; this produces an exception message.
+Remember to flush using the web interface before stopping the container. This can avoid data loss.
 
 
-<h3>Instructions:</h3>
-<ol>
-	<li>Clone this project and go to the project's folder</li>
-	<li>Run the host script <code>./setup.sh</code>
-	<li>Log in the container <code>ssh -p 49701 root@localhost</code>. The default password is <em>xxxx</em></li>
-	<li>Run the container script <code>/home/root/./containerSetup.sh</code></li>	
-</ol>
-
-<h3>NOTES:</h3>
-<ul>
-	<li>Parliament runs on port 8089. The application web interface would be available at <a href="http://localhost:8089/parliament">http://localhost:8089/parliament</a>.</li>
-	<li><code>containerSetup.sh</code> runs Parliament on the background by using <code>./StartParliament.sh &<code>; this produces an exception message.</li>
-	<li>Remember to flush using the web interface before stopping the container. This can avoid data loss.</li>
-</ul>
