@@ -28,8 +28,8 @@ Log in the container :
 ```ssh -p 49701 root@localhost``` 
 
 The default password is xxxx
-    
-Run Parliament launch script : 
+
+Run Parliament launch script :
 ```/home/root/./containerSetup.sh```
 
 ## Runtime informations
