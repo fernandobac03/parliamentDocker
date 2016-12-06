@@ -26,6 +26,7 @@ docker run -d --name="parliament1" -p 49701:49701 -p 8089:8089 daxid/docker_semw
 ## Log in the container with ssh and launch parliament
 Log in the container : 
 ```ssh -p 49701 root@localhost``` 
+
 The default password is xxxx
     
 Run Parliament launch script : 
