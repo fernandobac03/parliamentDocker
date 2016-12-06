@@ -30,7 +30,7 @@ Log in the container :
 The default password is xxxx
 
 Run Parliament launch script :
-	/home/root/./containerSetup.sh
+```/home/root/containerSetup.sh``` 
 
 ## Runtime informations
 
