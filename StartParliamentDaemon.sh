@@ -111,6 +111,7 @@ do_exec()
 {
 	#echo $EXEC_HEAD $EXEC_MID $1 $EXEC_TAIL | tr ' ' '\n'
 	$EXEC_HEAD $EXEC_MID $1 $EXEC_TAIL
+    wait $!
 }
 
 case "$1" in

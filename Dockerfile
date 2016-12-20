@@ -7,16 +7,16 @@ MAINTAINER daXid
 
 # Install
 RUN apt-get -qq update && apt-get install --fix-missing -y --force-yes \
-	openssh-server \
-	sudo \
+#	openssh-server \
+#	ssh \
+#	sudo \
 	wget \
-	gcc \
+#	gcc \
 	vim \
-	nano \
+#	nano \
 	dialog \
 	unzip \ 
-	openjdk-8-jdk \ 	
-	ssh
+	openjdk-8-jdk 	
 
 
 # Set environment
@@ -33,10 +33,9 @@ RUN echo 'root:xxxx' | chpasswd
 
 
 # Configure SSH
-RUN mkdir /var/run/sshd
-RUN sed -i 's/PermitRootLogin without-password/PermitRootLogin yes/' /etc/ssh/sshd_config
-RUN sed -i 's/22/49701/g' /etc/ssh/sshd_config
-#RUN echo 'StrictHostKeyChecking no' >> /etc/ssh/ssh_config
+#RUN mkdir /var/run/sshd
+#RUN sed -i 's/PermitRootLogin without-password/PermitRootLogin yes/' /etc/ssh/sshd_config
+#RUN sed -i 's/22/49701/g' /etc/ssh/sshd_config
 
 
 # Parliament
@@ -44,19 +43,21 @@ RUN mkdir /usr/local/ParliamentKB
 RUN wget -P /usr/local/ParliamentKB/ http://semwebcentral.org/frs/download.php/555/ParliamentQuickStart-v2.7.10-gcc-64-ubuntu-15.10.zip
 RUN unzip /usr/local/ParliamentKB/ParliamentQuickStart-v2.7.10-gcc-64-ubuntu-15.10.zip -d /usr/local/ParliamentKB
 RUN chown -R root:root /usr/local/ParliamentKB
-RUN chmod +x /usr/local/ParliamentKB/StartParliament.sh
-RUN chmod +x /usr/local/ParliamentKB/StartParliamentDaemon.sh
-
 
 
 # Add files
-ADD containerSetup.sh /home/root/containerSetup.sh
-ADD jetty.xml /usr/local/ParliamentKB/conf/jetty.xml
-ADD webdefault.xml /usr/local/ParliamentKB/conf/webdefault.xml
-ADD realm.properties /usr/local/ParliamentKB/conf/realm.properties
-ADD ParliamentConfig.txt /usr/local/ParliamentKB/ParliamentConfig.txt
-ADD StartParliament.sh /usr/local/ParliamentKB/StartParliament.sh
-ADD StartParliamentDaemon.sh /usr/local/ParliamentKB/StartParliamentDaemon.sh
+COPY containerSetup.sh /home/root/containerSetup.sh
+COPY jetty.xml /usr/local/ParliamentKB/conf/jetty.xml
+COPY webdefault.xml /usr/local/ParliamentKB/conf/webdefault.xml
+COPY realm.properties /usr/local/ParliamentKB/conf/realm.properties
+COPY ParliamentConfig.txt /usr/local/ParliamentKB/ParliamentConfig.txt
+COPY StartParliament.sh /usr/local/ParliamentKB/StartParliament.sh
+COPY StartParliamentDaemon.sh /usr/local/ParliamentKB/StartParliamentDaemon.sh
+
+# Set permissions
+RUN chmod +x /usr/local/ParliamentKB/StartParliament.sh
+RUN chmod +x /usr/local/ParliamentKB/StartParliamentDaemon.sh
+RUN chmod +x /usr/local/ParliamentKB/bin/jsvc
 
 
 RUN chown root:root \
@@ -69,14 +70,14 @@ RUN chown root:root \
 	/usr/local/ParliamentKB/StartParliamentDaemon.sh
 
 
-
-# Restarting services
-#RUN stop ssh
-#RUN start ssh
-
-
-EXPOSE 49701
+#EXPOSE 49701
 EXPOSE 8089
 
+WORKDIR /usr/local/ParliamentKB/
 
-CMD ["/usr/sbin/sshd", "-D"]
+
+#CMD ["/usr/sbin/sshd", "-D"]
+ENTRYPOINT ["./StartParliamentDaemon.sh"]
+#CMD ["start"]
+
+

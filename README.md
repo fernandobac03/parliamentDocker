@@ -49,7 +49,7 @@ is lost between each run of the image.
 To store the data in a named Docker volume container parliament-data
 (recommended), create it first as:
 
-```docker run --name parliament-data -v /usr/local/ParliamentKB/data busybo```
+```docker run --name parliament-data -v /usr/local/ParliamentKB/data busybox```
 
 Then start Parliament using --volumes-from. This allows you to later upgrade the
 Parliament docker image without losing the data. The command below also uses
