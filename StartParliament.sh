@@ -45,4 +45,4 @@ EXEC="$EXEC com.bbn.parliament.jena.jetty.CmdLineJettyServer $@"
 # echo EXEC = $EXEC
 # echo LD_LIBRARY_PATH = $LD_LIBRARY_PATH
 
-$EXEC
+exec $EXEC

@@ -46,7 +46,7 @@ RUN chown -R root:root /usr/local/ParliamentKB
 
 
 # Add files
-COPY containerSetup.sh /home/root/containerSetup.sh
+#COPY containerSetup.sh /home/root/containerSetup.sh
 COPY jetty.xml /usr/local/ParliamentKB/conf/jetty.xml
 COPY webdefault.xml /usr/local/ParliamentKB/conf/webdefault.xml
 COPY realm.properties /usr/local/ParliamentKB/conf/realm.properties
@@ -61,7 +61,7 @@ RUN chmod +x /usr/local/ParliamentKB/bin/jsvc
 
 
 RUN chown root:root \
-	/home/root/containerSetup.sh \
+#	/home/root/containerSetup.sh \
 	/usr/local/ParliamentKB/conf/realm.properties \
 	/usr/local/ParliamentKB/conf/jetty.xml \ 	
 	/usr/local/ParliamentKB/conf/webdefault.xml \
@@ -77,7 +77,7 @@ WORKDIR /usr/local/ParliamentKB/
 
 
 #CMD ["/usr/sbin/sshd", "-D"]
-ENTRYPOINT ["./StartParliamentDaemon.sh"]
+ENTRYPOINT ["./StartParliament.sh"]
 #CMD ["start"]
 
 
