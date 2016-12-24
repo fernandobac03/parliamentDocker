@@ -7,11 +7,10 @@ Scripts and stuff for building a Docker image of Parliament triple store (http:/
 
 	README.md - This file.
 	Dockerfile - Docker file for building a Docker Image.
-	containerSetup.sh - Commands for setting up Parliament inside a container.
 	setup.sh - Host script for removing old containers and images from host machine. Then, it creates a Docker image called "parliament_img".
-	jetty.xml - Web and application server configuration file, .
+	jetty.xml - Web and application server configuration file .
 	ParliamentConfig.txt - Parliament configuration file, modified to enable basic authentication.
-	StartParliament.sh - Parliament startup script.
+	StartParliament.sh - Parliament startup script (last line modified to exec $EXEC).
 	StartParliamentDaemon.sh - Parliament startup script as a daemon.
 	webdefault.xml - Jetty Webapp config modified to enable basic authentication.
 	realm.properties - Jetty declaration of users.
@@ -21,24 +20,15 @@ Scripts and stuff for building a Docker image of Parliament triple store (http:/
 
 ## Run the image in a container
 For instance with :
-docker run -d --name="parliament1" -p 49701:49701 -p 8089:8089 daxid/docker_semwebcentral-parliament
+docker run -d --name="parliament1" -p 8089:8089 daxid/docker_semwebcentral-parliament
 
-## Log in the container with ssh and launch parliament
-Log in the container : 
-```ssh -p 49701 root@localhost``` 
-
-The default password is xxxx
-
-Run Parliament launch script :
-/home/root/containerSetup.sh
-
+ 
 ## Runtime informations
 
 Parliament runs on port 8089. 
-The application web interface would be available at http://localhost:8089/parliament.
+The application web interface should be available at http://localhost:8089/parliament.
 The access recquire login : parliament /pwd : xxxx  (you can modify that in /usr/local/ParliamentDB/conf/realm.properties)
-containerSetup.sh runs Parliament on the background by using ./StartParliament.sh &; this produces an exception message.
-Remember to flush using the web interface before stopping the container. This can avoid data loss.
+Stoping the container (docker stop parliament1) should shut down parliament gracefully so it can flush the databases and avoid coruption. You can  flush using the web interface before stopping the container to be sure... 
 
 ## Data persistence
 
@@ -55,13 +45,13 @@ Then start Parliament using --volumes-from. This allows you to later upgrade the
 Parliament docker image without losing the data. The command below also uses
 -d to start the container in the background.
 
-```docker run -d --name parliament --volumes-from parliament-data  -p 49701:49701 -p 8089:8089 daxid/docker_semwebcentral-parliament```
+```docker run -d --name parliament --volumes-from parliament-data -p 8089:8089 daxid/docker_semwebcentral-parliament```
 
 
 If you want to store fuseki data in a specified location on the host (e.g. for
 disk space or speed requirements), specify it using -v:
 
-```docker run -d --name parliament -v /volume/hd/parliament-data:/usr/local/ParliamentKB/data -p 49701:49701 -p 8089:8089 daxid/docker_semwebcentral-parliament```
+```docker run -d --name parliament -v /volume/hd/parliament-data:/usr/local/ParliamentKB/data -p 8089:8089 daxid/docker_semwebcentral-parliament```
 
 Note that the data volume must only be accessed from a single Parliament container at a time.
 
