@@ -1,7 +1,7 @@
 # Docker Parliament triple store
 #
 
-FROM     ubuntu:15.10
+FROM     ubuntu:16.04
 MAINTAINER daXid
 
 
@@ -11,10 +11,8 @@ RUN apt-get -qq update && apt-get install --fix-missing -y --force-yes \
 #	ssh \
 #	sudo \
 	wget \
-#	gcc \
-	vim \
-#	nano \
-	dialog \
+#	vim \
+#	dialog \
 	unzip \ 
 	openjdk-8-jdk 	
 
@@ -46,7 +44,6 @@ RUN chown -R root:root /usr/local/ParliamentKB
 
 
 # Add files
-#COPY containerSetup.sh /home/root/containerSetup.sh
 COPY jetty.xml /usr/local/ParliamentKB/conf/jetty.xml
 COPY webdefault.xml /usr/local/ParliamentKB/conf/webdefault.xml
 COPY realm.properties /usr/local/ParliamentKB/conf/realm.properties
@@ -61,7 +58,6 @@ RUN chmod +x /usr/local/ParliamentKB/bin/jsvc
 
 
 RUN chown root:root \
-#	/home/root/containerSetup.sh \
 	/usr/local/ParliamentKB/conf/realm.properties \
 	/usr/local/ParliamentKB/conf/jetty.xml \ 	
 	/usr/local/ParliamentKB/conf/webdefault.xml \
@@ -78,6 +74,5 @@ WORKDIR /usr/local/ParliamentKB/
 
 #CMD ["/usr/sbin/sshd", "-D"]
 ENTRYPOINT ["./StartParliament.sh"]
-#CMD ["start"]
 
 

@@ -66,3 +66,9 @@ To stop the named container, use:
 To restart a named container (it will remember the volume and port config)
 
 ```docker restart parliament```
+
+
+# Todo 
+
+- Run as non-root user
+- Setup a random password on first startup
