@@ -7,10 +7,9 @@
    version="3.1"> 
 
   <!-- ==================================================================== -->
-  <!-- Add basic authentication						    -->
-  <!-- ==================================================================== -->
-
-
+  <!-- Uncomment the following block to add basic authentication	         -->
+  <!-- The usernames and passwords can be changed in the realm.properties file  -->  
+  <!-- ==================================================================== 
         <security-constraint>
 	  
          <web-resource-collection>
@@ -28,6 +27,9 @@
          <auth-method>BASIC</auth-method>
          <realm-name>Realm</realm-name>
       </login-config>
+============================================================================-->
+
+
 
 
   <!-- ===================================================================== -->
