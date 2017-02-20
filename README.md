@@ -27,7 +27,10 @@ docker run -d --name="parliament1" -p 8089:8089 daxid/parliament_triplestore
 
 Parliament runs on port 8089. 
 The application web interface should be available at http://localhost:8089/parliament.
-The access recquire login : parliament /pwd : xxxx  (you can modify that in /usr/local/ParliamentDB/conf/realm.properties)
+
+
+No login/pwd is configured. You can change this by modifing /usr/local/ParliamentDB/conf/webdefault.xml and /usr/local/ParliamentDB/conf/realm.properties.
+
 Stoping the container (docker stop parliament1) should shut down parliament gracefully so it can flush the databases and avoid coruption. You can  flush using the web interface before stopping the container to be sure... 
 
 To check the logs for the container you gave --name parliament, use:
