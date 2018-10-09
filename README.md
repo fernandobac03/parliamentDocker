@@ -1,3 +1,6 @@
+Source from: https://github.com/daxid/parliament-triplestore
+Thanks to: https://github.com/daxid
+
 # GitHub repo. content
 
 Scripts and stuff for building a Docker image of Parliament triple store (http://parliament.semwebcentral.org/).
